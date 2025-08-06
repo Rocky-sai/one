@@ -7,6 +7,7 @@ from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, Form, sta
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from jose import JWTError, jwt
 from pydantic import BaseModel, Field, EmailStr
 import motor.motor_asyncio
@@ -21,8 +22,8 @@ import json
 # ---------- CONFIGURATION ----------
 
 load_dotenv()
-MONGODB_URI = os.environ.get("MONGODB_URI")
-JWT_SECRET = os.environ.get("JWT_SECRET", "your_jwt_secret")
+MONGODB_URI = os.environ.get("MONGODB_URI", "mongodb://localhost:27017/acharya")
+JWT_SECRET = os.environ.get("JWT_SECRET", "your_jwt_secret_key_change_in_production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 UPLOAD_DIR = "uploads"
@@ -49,7 +50,7 @@ db = client["acharya"]
 def get_password_hash(password: str) -> str:
     return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode()
 
-def verify_password(plain_password, hashed_password):
+def verify_password(plain_password: str, hashed_password: str) -> bool:
     return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode())
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
@@ -59,47 +60,81 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     return jwt.encode(to_encode, JWT_SECRET, algorithm=ALGORITHM)
 
 async def extract_text_from_pdf(file_path: str) -> str:
-    return extract_text(file_path)
+    try:
+        return extract_text(file_path)
+    except Exception as e:
+        logger.error(f"Error extracting text from PDF: {e}")
+        return ""
 
 # ---------- LIFESPAN EVENT ----------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    if await db.users.count_documents({}) == 0:
-        await db.users.insert_many([
-            {"username": "admin", "password": get_password_hash("admin123"), "role": "Admin"},
-            {"username": "recruiter1", "password": get_password_hash("recruiter123"), "role": "Recruiter"},
-            {"username": "candidate1", "password": get_password_hash("candidate123"), "role": "Candidate"}
-        ])
-    if await db.jobs.count_documents({}) == 0:
-        await db.jobs.insert_many([
-            {"title": "Software Engineer", "company": "TechCorp", "location": "Remote"},
-            {"title": "Data Analyst", "company": "DataWorks", "location": "New York"},
-            {"title": "Web Developer", "company": "InnovateTech", "location": "San Francisco"}
-        ])
-    if await db.clients.count_documents({}) == 0:
-        await db.clients.insert_many([
-            {"name": "TechCorp", "contact": "hr@techcorp.com"},
-            {"name": "DataWorks", "contact": "jobs@dataworks.com"}
-        ])
-    if await db.chatmessages.count_documents({}) == 0:
-        await db.chatmessages.insert_many([
-            {"sender": "candidate1", "message": "Hi, anyone preparing for TechCorp?", "timestamp": datetime.utcnow()},
-            {"sender": "candidate2", "message": "Yes! Let's discuss coding challenges.", "timestamp": datetime.utcnow()}
-        ])
-    logger.info("Startup initialized default data if missing.")
+    try:
+        # Test database connection
+        await db.command("ping")
+        logger.info("Connected to MongoDB successfully")
+        
+        # Initialize default data if collections are empty
+        if await db.users.count_documents({}) == 0:
+            default_users = [
+                {"username": "admin", "password": get_password_hash("admin123"), "role": "Admin", "skills": "", "experience": "", "education": "", "projects": ""},
+                {"username": "recruiter1", "password": get_password_hash("recruiter123"), "role": "Recruiter", "skills": "", "experience": "", "education": "", "projects": ""},
+                {"username": "candidate1", "password": get_password_hash("candidate123"), "role": "Candidate", "skills": "Python, JavaScript", "experience": "2 years", "education": "B.Tech", "projects": "Web Development"}
+            ]
+            await db.users.insert_many(default_users)
+            logger.info("Inserted default users")
+            
+        if await db.jobs.count_documents({}) == 0:
+            default_jobs = [
+                {"title": "Software Engineer", "company": "TechCorp", "location": "Remote"},
+                {"title": "Data Analyst", "company": "DataWorks", "location": "New York"},
+                {"title": "Web Developer", "company": "InnovateTech", "location": "San Francisco"}
+            ]
+            await db.jobs.insert_many(default_jobs)
+            logger.info("Inserted default jobs")
+            
+        if await db.clients.count_documents({}) == 0:
+            default_clients = [
+                {"name": "TechCorp", "contact": "hr@techcorp.com"},
+                {"name": "DataWorks", "contact": "jobs@dataworks.com"}
+            ]
+            await db.clients.insert_many(default_clients)
+            logger.info("Inserted default clients")
+            
+        logger.info("Database initialization completed")
+        
+    except Exception as e:
+        logger.error(f"Database initialization error: {e}")
+    
     yield
-    # Shutdown (if needed)
+    
+    # Shutdown
+    try:
+        client.close()
+        logger.info("Database connection closed")
+    except Exception as e:
+        logger.error(f"Error closing database connection: {e}")
 
 # ---------- APP SETUP ----------
-app = FastAPI(title="Acharya Job Portal Backend", version="1.0.0", lifespan=lifespan)
+app = FastAPI(
+    title="Acharya Job Portal Backend", 
+    version="1.0.0", 
+    description="A comprehensive job portal platform with AI-powered features",
+    lifespan=lifespan
+)
+
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # In production, specify exact origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve static files (for frontend)
+app.mount("/static", StaticFiles(directory="."), name="static")
 
 # ---------- MODELS ----------
 
@@ -123,6 +158,7 @@ class UserLogin(BaseModel):
 
 class TokenResponse(BaseModel):
     access_token: str
+    token_type: str = "bearer"
     role: str
 
 class Activity(BaseModel):
@@ -196,6 +232,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
     )
     try:
         payload = jwt.decode(token, JWT_SECRET, algorithms=[ALGORITHM])
@@ -223,170 +260,485 @@ def candidate_required(user=Depends(get_current_user)):
     return user
 
 # ---------- AI PLACEHOLDER ----------
-async def analyze_resume_with_ai(resume_text, job_description):
-    # TODO: Replace with actual Gemini/OpenAI API call
-    # For now, return mock data
+async def analyze_resume_with_ai(resume_text: str, job_description: str):
+    """
+    Placeholder for AI resume analysis
+    In production, integrate with OpenAI, Google Gemini, or similar AI service
+    """
+    # Mock analysis based on simple keyword matching
+    job_keywords = job_description.lower().split()
+    resume_keywords = resume_text.lower().split()
+    
+    common_keywords = set(job_keywords) & set(resume_keywords)
+    suitability_score = min(100, len(common_keywords) * 10)
+    
+    missing_skills = ["Docker", "Kubernetes"] if "docker" not in resume_text.lower() else []
+    
     return {
-        "suitabilityScore": 80,
-        "missingSkills": ["Docker", "Kubernetes"],
-        "capabilityAnalysis": "The candidate has strong skills but lacks some DevOps experience. Suitable for the role with upskilling."
+        "suitabilityScore": suitability_score,
+        "missingSkills": missing_skills,
+        "capabilityAnalysis": f"The candidate shows {suitability_score}% alignment with the job requirements. Consider upskilling in missing areas."
     }
 
-async def evaluate_mock_test_with_ai(test_type, questions, answers):
-    # TODO: Replace with actual Gemini/OpenAI API call
-    score = 100 * sum(q['correctAnswer'] == a['answer'] for q, a in zip(questions, answers)) // len(questions)
-    return {
-        "score": score,
-        "evaluation": f"Candidate answered {score}% correctly. Good effort!"
-    }
+async def evaluate_mock_test_with_ai(test_type: str, questions: List[dict], answers: List[dict]):
+    """
+    Placeholder for AI test evaluation
+    """
+    if not answers or not questions:
+        return {"score": 0, "evaluation": "No answers provided"}
+    
+    correct_count = 0
+    for i, (question, answer) in enumerate(zip(questions, answers)):
+        if i < len(answers) and answer.get('answer', '').strip().lower() == question.get('correctAnswer', '').strip().lower():
+            correct_count += 1
+    
+    score = int((correct_count / len(questions)) * 100) if questions else 0
+    
+    evaluation = f"Scored {score}% ({correct_count}/{len(questions)} correct). "
+    if score >= 80:
+        evaluation += "Excellent performance!"
+    elif score >= 60:
+        evaluation += "Good effort, room for improvement."
+    else:
+        evaluation += "Needs significant improvement."
+    
+    return {"score": score, "evaluation": evaluation}
+
+# ---------- ERROR HANDLERS ----------
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail}
+    )
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled exception: {exc}")
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error"}
+    )
 
 # ---------- ENDPOINTS ----------
 
+@app.get("/")
+async def root():
+    return {"message": "Acharya Job Portal API", "version": "1.0.0", "status": "running"}
+
+@app.get("/health")
+async def health_check():
+    try:
+        await db.command("ping")
+        return {"status": "healthy", "database": "connected"}
+    except Exception as e:
+        return {"status": "unhealthy", "database": "disconnected", "error": str(e)}
+
 @app.post("/api/register")
 async def register(user: UserIn):
-    if user.role not in ['Admin', 'Recruiter', 'Candidate']:
-        raise HTTPException(status_code=400, detail="Invalid role")
-    existing = await db.users.find_one({"username": user.username})
-    if existing:
-        raise HTTPException(status_code=400, detail="Username already exists")
-    hashed = get_password_hash(user.password)
-    user_doc = {**user.dict(), "password": hashed}
-    await db.users.insert_one(user_doc)
-    await db.activities.insert_one({"description": f"User {user.username} registered as {user.role}", "timestamp": datetime.utcnow()})
-    logger.info(f"User {user.username} registered as {user.role}")
-    return {"success": True}
+    try:
+        if user.role not in ['Admin', 'Recruiter', 'Candidate']:
+            raise HTTPException(status_code=400, detail="Invalid role")
+        
+        # Check if username already exists
+        existing = await db.users.find_one({"username": user.username})
+        if existing:
+            raise HTTPException(status_code=400, detail="Username already exists")
+        
+        # Hash password and create user
+        hashed_password = get_password_hash(user.password)
+        user_doc = {
+            "username": user.username,
+            "password": hashed_password,
+            "role": user.role,
+            "skills": "",
+            "experience": "",
+            "education": "",
+            "projects": ""
+        }
+        
+        await db.users.insert_one(user_doc)
+        
+        # Log activity
+        await db.activities.insert_one({
+            "description": f"User {user.username} registered as {user.role}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        logger.info(f"User {user.username} registered as {user.role}")
+        return {"success": True, "message": "User registered successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Registration error: {e}")
+        raise HTTPException(status_code=500, detail="Registration failed")
 
 @app.post("/api/login", response_model=TokenResponse)
 async def login(credentials: UserLogin):
-    user = await db.users.find_one({"username": credentials.username})
-    if not user or not verify_password(credentials.password, user["password"]):
-        logger.warning(f"Login failed for username {credentials.username}")
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-    token = create_access_token({"username": user["username"], "role": user["role"]})
-    await db.activities.insert_one({"description": f"User {user['username']} logged in", "timestamp": datetime.utcnow()})
-    logger.info(f"User {user['username']} logged in")
-    return {"access_token": token, "role": user["role"]}
+    try:
+        # Find user
+        user = await db.users.find_one({"username": credentials.username})
+        if not user:
+            logger.warning(f"Login failed: User {credentials.username} not found")
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        
+        # Verify password
+        if not verify_password(credentials.password, user["password"]):
+            logger.warning(f"Login failed: Invalid password for user {credentials.username}")
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        
+        # Create access token
+        access_token = create_access_token(
+            data={"username": user["username"], "role": user["role"]}
+        )
+        
+        # Log activity
+        await db.activities.insert_one({
+            "description": f"User {user['username']} logged in",
+            "timestamp": datetime.utcnow()
+        })
+        
+        logger.info(f"User {user['username']} logged in successfully")
+        
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "role": user["role"]
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Login error: {e}")
+        raise HTTPException(status_code=500, detail="Login failed")
 
 @app.get("/api/activities")
 async def get_activities(user=Depends(admin_required)):
-    acts = await db.activities.find().sort("timestamp", -1).to_list(100)
-    return acts
+    try:
+        activities = await db.activities.find().sort("timestamp", -1).limit(100).to_list(100)
+        return activities
+    except Exception as e:
+        logger.error(f"Error fetching activities: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch activities")
 
 @app.get("/api/activities/filter")
 async def filter_activities(filter: str, user=Depends(admin_required)):
-    acts = await db.activities.find({"description": {"$regex": filter, "$options": "i"}}).sort("timestamp", -1).to_list(100)
-    return acts
+    try:
+        activities = await db.activities.find({
+            "description": {"$regex": filter, "$options": "i"}
+        }).sort("timestamp", -1).limit(100).to_list(100)
+        return activities
+    except Exception as e:
+        logger.error(f"Error filtering activities: {e}")
+        raise HTTPException(status_code=500, detail="Failed to filter activities")
 
 @app.get("/api/jobs")
 async def get_jobs(user=Depends(get_current_user)):
-    jobs = await db.jobs.find().to_list(100)
-    return jobs
+    try:
+        jobs = await db.jobs.find().to_list(100)
+        return jobs
+    except Exception as e:
+        logger.error(f"Error fetching jobs: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch jobs")
 
-@app.get("/api/jobs/{id}")
-async def get_job(id: str, user=Depends(recruiter_required)):
-    job = await db.jobs.find_one({"_id": id})
-    if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
-    return job
+@app.get("/api/jobs/{job_id}")
+async def get_job(job_id: str, user=Depends(recruiter_required)):
+    try:
+        from bson import ObjectId
+        job = await db.jobs.find_one({"_id": ObjectId(job_id)})
+        if not job:
+            raise HTTPException(status_code=404, detail="Job not found")
+        job["_id"] = str(job["_id"])
+        return job
+    except Exception as e:
+        logger.error(f"Error fetching job: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch job")
 
-@app.put("/api/jobs/{id}")
-async def update_job(id: str, job: Job, user=Depends(recruiter_required)):
-    result = await db.jobs.find_one_and_update({"_id": id}, {"$set": job.dict()}, return_document=True)
-    if not result:
-        raise HTTPException(status_code=404, detail="Job not found")
-    await db.activities.insert_one({"description": f"Job updated: {job.title} by {user['username']}", "timestamp": datetime.utcnow()})
-    return result
+@app.put("/api/jobs/{job_id}")
+async def update_job(job_id: str, job: Job, user=Depends(recruiter_required)):
+    try:
+        from bson import ObjectId
+        result = await db.jobs.find_one_and_update(
+            {"_id": ObjectId(job_id)},
+            {"$set": job.dict()},
+            return_document=True
+        )
+        if not result:
+            raise HTTPException(status_code=404, detail="Job not found")
+        
+        await db.activities.insert_one({
+            "description": f"Job updated: {job.title} by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        result["_id"] = str(result["_id"])
+        return result
+    except Exception as e:
+        logger.error(f"Error updating job: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update job")
 
-@app.delete("/api/jobs/{id}")
-async def delete_job(id: str, user=Depends(admin_required)):
-    job = await db.jobs.find_one_and_delete({"_id": id})
-    if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
-    await db.activities.insert_one({"description": f"Job deleted: {job['title']} by {user['username']}", "timestamp": datetime.utcnow()})
-    return {"success": True}
+@app.delete("/api/jobs/{job_id}")
+async def delete_job(job_id: str, user=Depends(admin_required)):
+    try:
+        from bson import ObjectId
+        job = await db.jobs.find_one_and_delete({"_id": ObjectId(job_id)})
+        if not job:
+            raise HTTPException(status_code=404, detail="Job not found")
+        
+        await db.activities.insert_one({
+            "description": f"Job deleted: {job['title']} by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        return {"success": True, "message": "Job deleted successfully"}
+    except Exception as e:
+        logger.error(f"Error deleting job: {e}")
+        raise HTTPException(status_code=500, detail="Failed to delete job")
 
-@app.post("/api/jobs", response_model=Job)
+@app.post("/api/jobs")
 async def post_job(job: Job, user=Depends(recruiter_required)):
-    await db.jobs.insert_one(job.dict())
-    await db.activities.insert_one({"description": f"Job posted: {job.title} by {user['username']}", "timestamp": datetime.utcnow()})
-    return job
+    try:
+        job_doc = job.dict()
+        result = await db.jobs.insert_one(job_doc)
+        
+        await db.activities.insert_one({
+            "description": f"Job posted: {job.title} by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        logger.info(f"Job {job.title} posted by {user['username']}")
+        return {"success": True, "message": "Job posted successfully", "job_id": str(result.inserted_id)}
+    except Exception as e:
+        logger.error(f"Error posting job: {e}")
+        raise HTTPException(status_code=500, detail="Failed to post job")
 
 @app.get("/api/clients")
 async def get_clients(user=Depends(admin_required)):
-    clients = await db.clients.find().to_list(100)
-    return clients
+    try:
+        clients = await db.clients.find().to_list(100)
+        return clients
+    except Exception as e:
+        logger.error(f"Error fetching clients: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch clients")
 
 @app.post("/api/clients")
 async def add_client(client: ClientData, user=Depends(admin_required)):
-    await db.clients.insert_one(client.dict())
-    await db.activities.insert_one({"description": f"Client added: {client.name} by {user['username']}", "timestamp": datetime.utcnow()})
-    return client
+    try:
+        await db.clients.insert_one(client.dict())
+        
+        await db.activities.insert_one({
+            "description": f"Client added: {client.name} by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        logger.info(f"Client {client.name} added by {user['username']}")
+        return {"success": True, "message": "Client added successfully"}
+    except Exception as e:
+        logger.error(f"Error adding client: {e}")
+        raise HTTPException(status_code=500, detail="Failed to add client")
 
 @app.get("/api/users/{username}")
-async def get_user_profile(username: str, user=Depends(candidate_required)):
-    u = await db.users.find_one({"username": username})
-    if not u:
-        raise HTTPException(status_code=404, detail="User not found")
-    return u
+async def get_user_profile(username: str, user=Depends(get_current_user)):
+    try:
+        # Users can only access their own profile unless they're admin
+        if user['username'] != username and user['role'] != 'Admin':
+            raise HTTPException(status_code=403, detail="Access denied")
+        
+        user_doc = await db.users.find_one({"username": username})
+        if not user_doc:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        # Remove password from response
+        user_doc.pop('password', None)
+        user_doc['_id'] = str(user_doc.get('_id', ''))
+        
+        return user_doc
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching user profile: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch user profile")
 
 @app.put("/api/users/{username}")
-async def update_user_profile(username: str, user_data: User, user=Depends(candidate_required)):
-    u = await db.users.find_one_and_update({"username": username}, {"$set": user_data.dict()}, return_document=True)
-    if not u:
-        raise HTTPException(status_code=404, detail="User not found")
-    await db.activities.insert_one({"description": f"Profile updated for {username}", "timestamp": datetime.utcnow()})
-    return u
+async def update_user_profile(username: str, user_data: dict, user=Depends(get_current_user)):
+    try:
+        # Users can only update their own profile unless they're admin
+        if user['username'] != username and user['role'] != 'Admin':
+            raise HTTPException(status_code=403, detail="Access denied")
+        
+        # Remove sensitive fields that shouldn't be updated via this endpoint
+        update_data = {k: v for k, v in user_data.items() if k not in ['password', 'username', 'role']}
+        
+        result = await db.users.find_one_and_update(
+            {"username": username},
+            {"$set": update_data},
+            return_document=True
+        )
+        
+        if not result:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        await db.activities.insert_one({
+            "description": f"Profile updated for {username}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        # Remove password from response
+        result.pop('password', None)
+        result['_id'] = str(result.get('_id', ''))
+        
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error updating user profile: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update user profile")
 
 @app.get("/api/applications")
 async def get_applications(user=Depends(recruiter_required)):
-    apps = await db.applications.find().to_list(100)
-    return apps
+    try:
+        applications = await db.applications.find().to_list(100)
+        for app in applications:
+            app['_id'] = str(app.get('_id', ''))
+        return applications
+    except Exception as e:
+        logger.error(f"Error fetching applications: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch applications")
 
-@app.put("/api/applications/{id}")
-async def update_application(id: str, application: Application, user=Depends(recruiter_required)):
-    app = await db.applications.find_one_and_update({"_id": id}, {"$set": application.dict()}, return_document=True)
-    if not app:
-        raise HTTPException(status_code=404, detail="Application not found")
-    await db.activities.insert_one({"description": f"Application updated for {application.candidate} by {user['username']}", "timestamp": datetime.utcnow()})
-    return app
-
-@app.post("/api/mock-tests")
-async def submit_mock_test(test: MockTest, user=Depends(candidate_required)):
-    await db.mocktests.insert_one(test.dict())
-    await db.activities.insert_one({"description": f"Mock test submitted by {test.user}", "timestamp": datetime.utcnow()})
-    return test
-
-@app.post("/api/resume-analyze")
-async def analyze_resume(req: ResumeAnalyzeReq, user=Depends(candidate_required)):
-    if len(req.resume) > 100:
-        analysis = "Good length, but add more specific achievements."
-    else:
-        analysis = "Resume too short, add more details."
-    await db.activities.insert_one({"description": f"Resume analyzed by {user['username']}", "timestamp": datetime.utcnow()})
-    return {"success": True, "analysis": analysis}
+@app.put("/api/applications/{app_id}")
+async def update_application(app_id: str, application_data: dict, user=Depends(recruiter_required)):
+    try:
+        from bson import ObjectId
+        result = await db.applications.find_one_and_update(
+            {"_id": ObjectId(app_id)},
+            {"$set": application_data},
+            return_document=True
+        )
+        
+        if not result:
+            raise HTTPException(status_code=404, detail="Application not found")
+        
+        await db.activities.insert_one({
+            "description": f"Application updated for {result.get('candidate', 'unknown')} by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        result['_id'] = str(result['_id'])
+        return result
+    except Exception as e:
+        logger.error(f"Error updating application: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update application")
 
 @app.post("/api/applications")
 async def submit_application(app: Application, user=Depends(candidate_required)):
-    await db.applications.insert_one({**app.dict(), "candidate": user["username"]})
-    await db.activities.insert_one({"description": f"Application submitted by {user['username']}", "timestamp": datetime.utcnow()})
-    return app
+    try:
+        app_doc = app.dict()
+        app_doc['candidate'] = user['username']
+        app_doc['timestamp'] = datetime.utcnow()
+        
+        await db.applications.insert_one(app_doc)
+        
+        await db.activities.insert_one({
+            "description": f"Application submitted by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        logger.info(f"Application submitted by {user['username']}")
+        return {"success": True, "message": "Application submitted successfully"}
+    except Exception as e:
+        logger.error(f"Error submitting application: {e}")
+        raise HTTPException(status_code=500, detail="Failed to submit application")
+
+@app.post("/api/mock-tests")
+async def submit_mock_test(test: MockTest, user=Depends(candidate_required)):
+    try:
+        test_doc = test.dict()
+        test_doc['user'] = user['username']
+        test_doc['timestamp'] = datetime.utcnow()
+        
+        await db.mocktests.insert_one(test_doc)
+        
+        await db.activities.insert_one({
+            "description": f"Mock test submitted by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        return {"success": True, "message": "Mock test submitted successfully"}
+    except Exception as e:
+        logger.error(f"Error submitting mock test: {e}")
+        raise HTTPException(status_code=500, detail="Failed to submit mock test")
+
+@app.post("/api/resume-analyze")
+async def analyze_resume(req: ResumeAnalyzeReq, user=Depends(candidate_required)):
+    try:
+        # Simple analysis based on resume length and content
+        resume_text = req.resume
+        
+        if len(resume_text) > 500:
+            analysis = "Good length resume. Consider adding more specific achievements and quantifiable results."
+        elif len(resume_text) > 200:
+            analysis = "Decent resume length. Add more technical skills and project details."
+        else:
+            analysis = "Resume is too short. Add more details about your experience, skills, and projects."
+        
+        await db.activities.insert_one({
+            "description": f"Resume analyzed by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        logger.info(f"Resume analyzed by {user['username']}")
+        return {"success": True, "analysis": analysis}
+    except Exception as e:
+        logger.error(f"Error analyzing resume: {e}")
+        raise HTTPException(status_code=500, detail="Failed to analyze resume")
 
 @app.get("/api/chat-messages")
 async def get_chat_messages(user=Depends(candidate_required)):
-    msgs = await db.chatmessages.find().sort("timestamp", -1).to_list(100)
-    return msgs
+    try:
+        messages = await db.chatmessages.find().sort("timestamp", -1).limit(100).to_list(100)
+        return messages
+    except Exception as e:
+        logger.error(f"Error fetching chat messages: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch chat messages")
 
 @app.post("/api/chat-messages")
 async def send_message(msg: ChatMessage, user=Depends(candidate_required)):
-    await db.chatmessages.insert_one({**msg.dict(), "sender": user["username"]})
-    await db.activities.insert_one({"description": f"Chat message sent by {user['username']}", "timestamp": datetime.utcnow()})
-    return msg
+    try:
+        msg_doc = msg.dict()
+        msg_doc['sender'] = user['username']
+        msg_doc['timestamp'] = datetime.utcnow()
+        
+        await db.chatmessages.insert_one(msg_doc)
+        
+        await db.activities.insert_one({
+            "description": f"Chat message sent by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        return {"success": True, "message": "Message sent successfully"}
+    except Exception as e:
+        logger.error(f"Error sending message: {e}")
+        raise HTTPException(status_code=500, detail="Failed to send message")
 
 @app.post("/api/coding-practice")
 async def submit_code(cp: CodingPractice, user=Depends(candidate_required)):
-    await db.codingpractices.insert_one({**cp.dict(), "user": user["username"]})
-    await db.activities.insert_one({"description": f"Code submitted by {user['username']}", "timestamp": datetime.utcnow()})
-    return cp
+    try:
+        cp_doc = cp.dict()
+        cp_doc['user'] = user['username']
+        cp_doc['timestamp'] = datetime.utcnow()
+        
+        await db.codingpractices.insert_one(cp_doc)
+        
+        await db.activities.insert_one({
+            "description": f"Code submitted by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        return {"success": True, "message": "Code submitted successfully"}
+    except Exception as e:
+        logger.error(f"Error submitting code: {e}")
+        raise HTTPException(status_code=500, detail="Failed to submit code")
 
 @app.post("/api/recruiter/analyze-resume")
 async def recruiter_analyze_resume(
@@ -395,81 +747,152 @@ async def recruiter_analyze_resume(
     resume: UploadFile = File(...),
     user=Depends(recruiter_required)
 ):
-    file_path = os.path.join(UPLOAD_DIR, f"{uuid4()}_{resume.filename}")
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(resume.file, buffer)
-    resume_text = await extract_text_from_pdf(file_path)
-    analysis = await analyze_resume_with_ai(resume_text, jobDescription)
-    os.remove(file_path)
-    doc = {
-        "candidate": candidate,
-        "jobDescription": jobDescription,
-        "resumeText": resume_text,
-        **analysis,
-        "analyzedAt": datetime.utcnow(),
-    }
-    await db.resumeanalyses.insert_one(doc)
-    logger.info(f"Resume analyzed for {candidate} by recruiter {user['username']}")
-    return {"success": True, "analysis": analysis}
+    try:
+        # Save uploaded file
+        file_path = os.path.join(UPLOAD_DIR, f"{uuid4()}_{resume.filename}")
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(resume.file, buffer)
+        
+        # Extract text from PDF
+        resume_text = await extract_text_from_pdf(file_path)
+        
+        # Analyze with AI (placeholder)
+        analysis = await analyze_resume_with_ai(resume_text, jobDescription)
+        
+        # Clean up file
+        os.remove(file_path)
+        
+        # Save analysis to database
+        analysis_doc = {
+            "candidate": candidate,
+            "jobDescription": jobDescription,
+            "resumeText": resume_text,
+            "suitabilityScore": analysis["suitabilityScore"],
+            "missingSkills": analysis["missingSkills"],
+            "capabilityAnalysis": analysis["capabilityAnalysis"],
+            "analyzedAt": datetime.utcnow(),
+            "analyzedBy": user["username"]
+        }
+        
+        await db.resumeanalyses.insert_one(analysis_doc)
+        
+        logger.info(f"Resume analyzed for {candidate} by recruiter {user['username']}")
+        
+        return {"success": True, "analysis": analysis}
+        
+    except Exception as e:
+        logger.error(f"Error in resume analysis: {e}")
+        raise HTTPException(status_code=500, detail="Failed to analyze resume")
 
 @app.get("/api/recruiter/resume-analysis/{candidate}")
 async def recruiter_get_resume_analyses(candidate: str, user=Depends(recruiter_required)):
-    analyses = await db.resumeanalyses.find({"candidate": candidate}).sort("analyzedAt", -1).to_list(100)
-    return {"success": True, "analyses": analyses}
+    try:
+        analyses = await db.resumeanalyses.find(
+            {"candidate": candidate}
+        ).sort("analyzedAt", -1).to_list(100)
+        
+        for analysis in analyses:
+            analysis['_id'] = str(analysis.get('_id', ''))
+        
+        return {"success": True, "analyses": analyses}
+    except Exception as e:
+        logger.error(f"Error fetching resume analyses: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch resume analyses")
 
 @app.post("/api/recruiter/assign-mock-test")
-async def assign_mock_test(
-    candidate: str = Form(...),
-    testType: str = Form(...),
-    questions: str = Form(...),  # Pass as JSON string
-    duration: int = Form(...),
-    user=Depends(recruiter_required)
-):
-    qlist = json.loads(questions)
-    doc = {
-        "candidate": candidate,
-        "testType": testType,
-        "questions": qlist,
-        "duration": duration,
-        "assignedBy": user["username"],
-        "status": "Pending"
-    }
-    await db.assignedmocktests.insert_one(doc)
-    await db.activities.insert_one({"description": f"Mock test assigned to {candidate} by {user['username']}", "timestamp": datetime.utcnow()})
-    return {"success": True, "mockTest": doc}
+async def assign_mock_test(test_data: dict, user=Depends(recruiter_required)):
+    try:
+        test_doc = {
+            "candidate": test_data["candidate"],
+            "testType": test_data["testType"],
+            "questions": test_data["questions"],
+            "duration": test_data["duration"],
+            "assignedBy": user["username"],
+            "status": "Pending",
+            "assignedAt": datetime.utcnow()
+        }
+        
+        result = await db.assignedmocktests.insert_one(test_doc)
+        
+        await db.activities.insert_one({
+            "description": f"Mock test assigned to {test_data['candidate']} by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        return {"success": True, "message": "Mock test assigned successfully", "test_id": str(result.inserted_id)}
+    except Exception as e:
+        logger.error(f"Error assigning mock test: {e}")
+        raise HTTPException(status_code=500, detail="Failed to assign mock test")
 
-@app.post("/api/candidate/submit-mock-test/{testId}")
-async def submit_mock_test_answers(testId: str, answers: List[Any], user=Depends(candidate_required)):
-    mockTest = await db.assignedmocktests.find_one({"_id": testId})
-    if not mockTest:
-        raise HTTPException(status_code=404, detail="Mock test not found")
-    if mockTest['candidate'] != user['username']:
-        raise HTTPException(status_code=403, detail="Not authorized")
-    if mockTest['status'] == 'Completed':
-        raise HTTPException(status_code=400, detail="Test already completed")
-    eval_result = await evaluate_mock_test_with_ai(mockTest['testType'], mockTest['questions'], answers)
-    await db.assignedmocktests.update_one(
-        {"_id": testId},
-        {"$set": {
-            "status": "Completed",
+@app.post("/api/candidate/submit-mock-test/{test_id}")
+async def submit_mock_test_answers(test_id: str, answers_data: dict, user=Depends(candidate_required)):
+    try:
+        from bson import ObjectId
+        
+        # Find the mock test
+        mock_test = await db.assignedmocktests.find_one({"_id": ObjectId(test_id)})
+        if not mock_test:
+            raise HTTPException(status_code=404, detail="Mock test not found")
+        
+        if mock_test['candidate'] != user['username']:
+            raise HTTPException(status_code=403, detail="Not authorized")
+        
+        if mock_test['status'] == 'Completed':
+            raise HTTPException(status_code=400, detail="Test already completed")
+        
+        # Evaluate answers
+        answers = answers_data.get('answers', [])
+        eval_result = await evaluate_mock_test_with_ai(
+            mock_test['testType'], 
+            mock_test['questions'], 
+            answers
+        )
+        
+        # Update test with results
+        await db.assignedmocktests.update_one(
+            {"_id": ObjectId(test_id)},
+            {"$set": {
+                "status": "Completed",
+                "score": eval_result['score'],
+                "evaluation": eval_result['evaluation'],
+                "submittedAt": datetime.utcnow(),
+                "answers": answers,
+            }}
+        )
+        
+        await db.activities.insert_one({
+            "description": f"Mock test submitted by {user['username']}",
+            "timestamp": datetime.utcnow()
+        })
+        
+        return {
+            "success": True,
             "score": eval_result['score'],
-            "evaluation": eval_result['evaluation'],
-            "submittedAt": datetime.utcnow(),
-            "answers": answers,
-        }}
-    )
-    await db.activities.insert_one({"description": f"Mock test submitted by {user['username']}", "timestamp": datetime.utcnow()})
-    return {
-        "success": True,
-        "score": eval_result['score'],
-        "evaluation": eval_result['evaluation']
-    }
+            "evaluation": eval_result['evaluation']
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error submitting mock test: {e}")
+        raise HTTPException(status_code=500, detail="Failed to submit mock test")
 
 @app.get("/api/recruiter/mock-test-results/{candidate}")
 async def recruiter_get_mock_test_results(candidate: str, user=Depends(recruiter_required)):
-    tests = await db.assignedmocktests.find({"candidate": candidate, "status": "Completed"}).sort("submittedAt", -1).to_list(100)
-    return {"success": True, "tests": tests}
+    try:
+        tests = await db.assignedmocktests.find({
+            "candidate": candidate,
+            "status": "Completed"
+        }).sort("submittedAt", -1).to_list(100)
+        
+        for test in tests:
+            test['_id'] = str(test.get('_id', ''))
+        
+        return {"success": True, "tests": tests}
+    except Exception as e:
+        logger.error(f"Error fetching mock test results: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch mock test results")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=3000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

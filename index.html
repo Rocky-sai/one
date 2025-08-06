@@ -3,33 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACHARYA - Login / Register</title>
+    <title>ACHARYA - Career Forging Platform</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
 </head>
 <body>
-    <h1>ACHARYA - Career Forging Platform</h1>
-    <h2>Login</h2>
-    <form id="loginForm">
-        <label for="loginUsername">Username:</label>
-        <input type="text" id="loginUsername" required>
-        <label for="loginPassword">Password:</label>
-        <input type="password" id="loginPassword" required>
-        <button type="submit">Login</button>
-    </form>
-    <h2>Register</h2>
-    <form id="registerForm">
-        <label for="registerUsername">Username:</label>
-        <input type="text" id="registerUsername" required>
-        <label for="registerPassword">Password:</label>
-        <input type="password" id="registerPassword" required>
-        <label for="registerRole">Role:</label>
-        <select id="registerRole" required>
-            <option value="Admin">Admin</option>
-            <option value="Recruiter">Recruiter</option>
-            <option value="Candidate">Candidate</option>
-        </select>
-        <button type="submit">Register</button>
-    </form>
+    <div class="container">
+        <h1>ACHARYA</h1>
+        <p class="subtitle">Career Forging Platform</p>
+        
+        <div class="auth-tabs">
+            <button class="tab-button active" onclick="switchTab('login')">Login</button>
+            <button class="tab-button" onclick="switchTab('register')">Register</button>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="form-container active">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn" id="loginBtn">
+                    <span class="btn-text">Login</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form" class="form-container">
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerUsername">Username</label>
+                    <input type="text" id="registerUsername" placeholder="Choose a username" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerRole">Role</label>
+                    <select id="registerRole" required>
+                        <option value="">Select your role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Recruiter">Recruiter</option>
+                        <option value="Candidate">Candidate</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn" id="registerBtn">
+                    <span class="btn-text">Register</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 ACHARYA. Empowering careers through technology.</p>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
