@@ -1,0 +1,167 @@
+/* recruiter_dashboard.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #000000);
+    color: #ffffff;
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh; /* Changed from height to allow scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Removed justify-content: center to allow natural flow */
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #87ceeb;
+    margin-bottom: 20px;
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.welcome-message h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+.welcome-message span {
+    color: #87ceeb;
+}
+
+.dashboard-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    width: 100%;
+    margin-bottom: 40px; /* Added spacing */
+}
+
+button {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #87ceeb;
+    color: #000000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #00b7eb;
+}
+
+#logout {
+    background: #ff6f61;
+}
+
+#logout:hover {
+    background: #ff3b2f;
+}
+
+/* Section Styling */
+.resume-analysis, .mock-test, .mock-test-results {
+    max-width: 600px; /* Wider than dashboard-options for forms */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Slight transparency */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.resume-analysis h2, .mock-test h2, .mock-test-results h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #87ceeb;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+input[type="text"], input[type="number"], textarea, select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+}
+
+input[type="file"] {
+    padding: 10px 0; /* Adjust padding for file input */
+    color: #ffffff;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Results and Charts */
+#analysisResults, #testResults {
+    margin-top: 20px;
+}
+
+#analysisDetails, #testDetails {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+canvas {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Spinner for Loading State */
+.spinner {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #87ceeb;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Container Adjustments */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Limits the width for larger screens */
+    margin: 0 auto;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Coding Practice - ACHARYA</title>
+    <link rel="stylesheet" href="candidate_coding.css">
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/lib/jwt-decode.min.js"></script>
+</head>
+<body>
+    <h1>Virtual Coding Practice</h1>
+    <button id="back">Back to Dashboard</button>
+    <form id="codingForm">
+        <label for="problem">Problem:</label>
+        <input type="text" id="problem" required>
+        <label for="code">Your Code:</label>
+        <textarea id="code" required></textarea>
+        <button type="submit">Submit Code</button>
+    </form>
+    <div id="codingResult">
+        <h2>Result</h2>
+        <p id="output">Code submitted successfully! (Output simulation)</p>
+    </div>
+    <script src="candidate_coding.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #000000);
+    color: #ffffff;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    text-align: center;
+    color: #87ceeb;
+    margin-bottom: 24px;
+    text-shadow: 0 0 10px #87ceeb;
+}
+
+#back {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 10;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    background: #ff6f61;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+#back:hover, #back:focus {
+    background: #ff3b2f;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto 16px auto;
+    background: rgba(255,255,255,0.1);
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    color: #87ceeb;
+    margin-bottom: 2px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 2px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 1rem;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #87ceeb;
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #00b7eb;
+}
+
+#goalsList {
+    max-width: 600px;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+#aiResponseContainer {
+    max-width: 600px;
+    margin: 24px auto;
+    background: rgba(255,255,255,0.1);
+    padding: 22px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    min-height: 100px;
+}
+
+#aiResponse {
+    margin-top: 10px;
+    font-size: 1.07rem;
+    color: #e0e0e0;
+}
+
+#aiResponse a {
+    color: #87ceeb;
+    text-decoration: underline;
+}
+
+#loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.spinner {
+    border: 8px solid #333;
+    border-top: 8px solid #87ceeb;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 8px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}

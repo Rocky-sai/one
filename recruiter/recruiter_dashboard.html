@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Dashboard - ACHARYA</title>
+    <link rel="stylesheet" href="recruiter_dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js" onerror="alert('Failed to load jwt-decode. Using local fallback.')"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .spinner { display: inline-block; margin-left: 10px; font-size: 14px; color: #87ceeb; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Recruiter Dashboard</h1>
+        <div class="welcome-message">
+            <h2>Welcome, <span id="username">Recruiter</span>!</h2>
+        </div>
+        <div class="dashboard-options">
+            <button onclick="window.location.href='recruiter_jobs.html'">Manage Job Postings</button>
+            <button onclick="window.location.href='recruiter_applications.html'">Review Applications</button>
+            <button id="logout">Logout</button>
+        </div>
+        <div class="resume-analysis">
+            <h2>Analyze Candidate Resume</h2>
+            <form id="resumeAnalysisForm" enctype="multipart/form-data">
+                <label for="candidate">Candidate Username:</label>
+                <input type="text" id="candidate" name="candidate" required>
+                <label for="jobDescription">Job Description:</label>
+                <textarea id="jobDescription" name="jobDescription" required placeholder="Enter the job description..."></textarea>
+                <label for="resume">Upload Resume (PDF):</label>
+                <input type="file" id="resume" name="resume" accept="application/pdf" required>
+                <button type="submit">Analyze Resume</button>
+            </form>
+            <div id="analysisResults">
+                <canvas id="suitabilityChart" style="max-width: 400px;"></canvas>
+                <div id="analysisDetails"></div>
+            </div>
+        </div>
+        <div class="mock-test">
+            <h2>Assign Mock Test to Candidate</h2>
+            <form id="mockTestForm">
+                <label for="mockCandidate">Candidate Username:</label>
+                <input type="text" id="mockCandidate" name="candidate" required>
+                <label for="testType">Test Type:</label>
+                <select id="testType" name="testType" required>
+                    <option value="Coding">Coding</option>
+                    <option value="Aptitude">Aptitude</option>
+                </select>
+                <label for="duration">Duration (minutes):</label>
+                <input type="number" id="duration" name="duration" min="1" required>
+                <label for="questions">Questions (JSON format):</label>
+                <textarea id="questions" name="questions" required placeholder='[{"question": "Write a function to reverse a string in JavaScript", "correctAnswer": "function reverseString(str) { return str.split(\'\').reverse().join(\'\'); }"}]'></textarea>
+                <button type="submit">Assign Test</button>
+            </form>
+        </div>
+        <div class="mock-test-results">
+            <h2>View Mock Test Results</h2>
+            <label for="resultsCandidate">Candidate Username:</label>
+            <input type="text" id="resultsCandidate" placeholder="Enter candidate username">
+            <button id="fetchResults">Fetch Results</button>
+            <div id="testResults">
+                <canvas id="testScoreChart" style="max-width: 400px;"></canvas>
+                <div id="testDetails"></div>
+            </div>
+        </div>
+    </div>
+    <script src="recruiter_dashboard.js"></script>
+    <!-- Fallback for jwt-decode -->
+    <script>if (typeof jwt_decode === 'undefined') { document.write('<script src="lib/jwt-decode.min.js"><\/script>'); }</script>
+
+</body>
+</html>

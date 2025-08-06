@@ -1,0 +1,29 @@
+{
+    "name": "acharya-job-portal",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "@google/generative-ai": "^0.21.0",
+        "axios": "^1.6.8",
+        "bcrypt": "^5.1.1",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.6.1",
+        "express": "^4.21.2",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.12.2",
+        "multer": "^1.4.5-lts.1",
+        "mysql2": "^3.9.2",
+        "node-schedule": "^2.1.1",
+        "pdf-parse": "^1.1.1",
+        "portfinder": "^1.0.32",
+        "winston": "^3.11.0"
+    },
+    "main": "server.js",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "Acharya Job Portal - A platform for recruiters and candidates"
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients Data Management - ACHARYA</title>
+    <link rel="stylesheet" href="admin_clients.css">
+</head>
+<body>
+    <h1>Clients Data Management</h1>
+    <button id="back">Back to Dashboard</button>
+    <form id="addClientForm">
+        <label for="clientName">Client Name:</label>
+        <input type="text" id="clientName" required>
+        <label for="clientContact">Contact:</label>
+        <input type="text" id="clientContact" required>
+        <button type="submit">Add Client</button>
+    </form>
+    <div id="clientList">
+        <h2>All Clients</h2>
+        <ul></ul>
+    </div>
+    <script src="admin_clients.js"></script>
+</body>
+</html>

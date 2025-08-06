@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Tests - ACHARYA</title>
+    <link rel="stylesheet" href="candidate_mock_tests.css">
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/lib/jwt-decode.min.js"></script>
+</head>
+<body>
+    <h1>Mock Tests</h1>
+    <button id="back">Back to Dashboard</button>
+    <form id="mockTestForm">
+        <label for="testName">Test Name:</label>
+        <input type="text" id="testName" required>
+        <label for="score">Score (out of 100):</label>
+        <input type="number" id="score" min="0" max="100" required>
+        <button type="submit">Submit Test</button>
+    </form>
+    <div id="testResults">
+        <h2>Your Test Results</h2>
+        <p>Mock test submitted successfully!</p>
+    </div>
+    <script src="candidate_mock_tests.js"></script>
+</body>
+</html>

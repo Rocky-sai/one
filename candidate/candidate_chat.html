@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room - ACHARYA</title>
+    <link rel="stylesheet" href="candidate_chat.css">
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/lib/jwt-decode.min.js"></script>
+</head>
+<body>
+    <h1>Chat Room</h1>
+    <button id="back">Back to Dashboard</button>
+    <div id="chatMessages">
+        <h2>Messages</h2>
+        <ul></ul>
+    </div>
+    <form id="chatForm">
+        <label for="chatMessage">Message:</label>
+        <input type="text" id="chatMessage" required>
+        <button type="submit">Send</button>
+    </form>
+    <script src="candidate_chat.js"></script>
+</body>
+</html>

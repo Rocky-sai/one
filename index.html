@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACHARYA - Login / Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>ACHARYA - Career Forging Platform</h1>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="loginUsername">Username:</label>
+        <input type="text" id="loginUsername" required>
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" required>
+        <button type="submit">Login</button>
+    </form>
+    <h2>Register</h2>
+    <form id="registerForm">
+        <label for="registerUsername">Username:</label>
+        <input type="text" id="registerUsername" required>
+        <label for="registerPassword">Password:</label>
+        <input type="password" id="registerPassword" required>
+        <label for="registerRole">Role:</label>
+        <select id="registerRole" required>
+            <option value="Admin">Admin</option>
+            <option value="Recruiter">Recruiter</option>
+            <option value="Candidate">Candidate</option>
+        </select>
+        <button type="submit">Register</button>
+    </form>
+    <script src="script.js"></script>
+</body>
+</html>

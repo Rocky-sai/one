@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company-Based Tests - ACHARYA</title>
+    <link rel="stylesheet" href="candidate_company_tests.css">
+</head>
+<body>
+    <h1>Company-Based Tests</h1>
+    <button id="back">Back to Dashboard</button>
+    <form id="companyTestForm">
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" required>
+        <label for="testScore">Test Score (out of 100):</label>
+        <input type="number" id="testScore" min="0" max="100" required>
+        <button type="submit">Submit Test</button>
+    </form>
+    <div id="testResult">
+        <h2>Test Result</h2>
+        <p id="resultText"></p>
+    </div>
+    <script src="candidate_company_tests.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Applications - ACHARYA</title>
+    <link rel="stylesheet" href="recruiter_applications.css">
+</head>
+<body>
+    <h1>Review Applications</h1>
+    <button id="back">Back to Dashboard</button>
+    <div id="applicationList">
+        <h2>All Applications</h2>
+        <ul></ul>
+    </div>
+    <form id="updateApplicationForm" style="display: none;">
+        <h2>Update Application</h2>
+        <p>Candidate: <span id="appCandidate"></span></p>
+        <p>Job: <span id="appJob"></span></p>
+        <label for="appStatus">Status:</label>
+        <select id="appStatus">
+            <option value="Pending">Pending</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+        <label for="appFeedback">Feedback:</label>
+        <textarea id="appFeedback"></textarea>
+        <button type="submit">Update Application</button>
+    </form>
+    <script src="recruiter_applications.js"></script>
+</body>
+</html>

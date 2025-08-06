@@ -1,0 +1,191 @@
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-03-22T06:20:27.899Z"}
+{"level":"info","message":"Server running on port 3001","timestamp":"2025-03-22T06:20:28.411Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-03-22T06:28:13.134Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-03-22T06:45:57.082Z"}
+{"level":"info","message":"Server running on port 3001","timestamp":"2025-03-22T06:45:57.681Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-03-24T03:52:39.135Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-24T03:52:39.616Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-03-24T03:55:05.697Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-03-24T03:56:11.926Z"}
+{"level":"info","message":"Application submitted by venky","timestamp":"2025-03-24T03:56:36.721Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-03-24T03:56:50.325Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-03-24T03:56:58.291Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-18T14:33:12.437Z"}
+{"level":"info","message":"Server running on port 3001","timestamp":"2025-06-18T14:33:13.639Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-06-18T14:34:13.240Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-18T14:34:17.586Z"}
+{"level":"info","message":"Server running on port 3001","timestamp":"2025-06-18T14:34:18.305Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-19T17:05:54.507Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-06-19T17:05:55.135Z"}
+{"level":"warn","message":"Registration failed: Username venky already exists","timestamp":"2025-06-19T17:09:32.539Z"}
+{"level":"info","message":"User venkat registered successfully as Admin","timestamp":"2025-06-19T17:09:45.519Z"}
+{"level":"info","message":"User venkat logged in successfully","timestamp":"2025-06-19T17:09:54.955Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-06-19T17:10:51.042Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-06-19T17:11:02.042Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-06-19T17:14:53.947Z"}
+{"level":"error","message":"Error initializing data:","timestamp":"2025-06-20T07:40:39.965Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-06-20T07:40:39.993Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-20T07:40:44.584Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-06-20T07:44:37.569Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-06-20T07:48:12.279Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-22T13:49:25.560Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-06-22T13:49:27.819Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-22T13:53:31.409Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-06-22T13:53:32.322Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-06-22T14:01:15.747Z"}
+{"level":"warn","message":"Login failed: Invalid credentials for username venkat ","timestamp":"2025-06-22T14:09:10.749Z"}
+{"level":"warn","message":"Login failed: Invalid password for username venkat","timestamp":"2025-06-22T14:09:14.632Z"}
+{"level":"info","message":"User venkat logged in successfully","timestamp":"2025-06-22T14:09:19.276Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-06-22T14:09:26.811Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-06-22T14:09:34.234Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-30T20:20:01.855Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-06-30T20:20:04.363Z"}
+{"level":"warn","message":"Registration failed: Username venky already exists","timestamp":"2025-06-30T20:20:40.690Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-06-30T20:21:28.148Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-06-30T20:21:32.753Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-06-30T20:21:33.659Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-06-30T20:22:23.427Z"}
+{"level":"error","message":"Error initializing data:","timestamp":"2025-07-11T06:14:30.507Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-11T06:14:30.544Z"}
+{"code":"ETIMEOUT","hostname":"_mongodb._tcp.cluster0.cwivpr4.mongodb.net","level":"error","message":"MongoDB Atlas connection error: querySrv ETIMEOUT _mongodb._tcp.cluster0.cwivpr4.mongodb.net","stack":"Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.cwivpr4.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:293:17)","syscall":"querySrv","timestamp":"2025-07-11T06:15:13.075Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-11T06:28:08.832Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-11T06:28:13.089Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-07-11T06:30:00.561Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-07-11T06:30:20.995Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-07-11T06:30:36.679Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-11T11:05:47.867Z"}
+{"level":"info","message":"Server running on port 3002","timestamp":"2025-07-11T11:05:48.376Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-11T11:07:39.194Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-11T11:07:42.729Z"}
+{"level":"info","message":"Server running on port 3002","timestamp":"2025-07-11T11:07:43.374Z"}
+{"level":"info","message":"Server closed","timestamp":"2025-07-11T11:08:08.593Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-15T06:50:10.785Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-15T06:50:12.255Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-07-15T06:50:26.693Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-07-15T06:50:39.579Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-07-15T06:51:14.563Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-15T06:53:38.580Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-07-15T06:54:05.889Z"}
+{"level":"warn","message":"Login failed: Invalid credentials for username cppvvgb","timestamp":"2025-07-15T06:59:16.967Z"}
+{"level":"warn","message":"Login failed: Invalid credentials for username fpmpod","timestamp":"2025-07-15T06:59:39.974Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-18T08:05:20.312Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-18T08:05:21.805Z"}
+{"level":"warn","message":"Registration failed: Username venky already exists","timestamp":"2025-07-18T08:38:48.793Z"}
+{"level":"warn","message":"Registration failed: Username venky already exists","timestamp":"2025-07-18T08:38:54.653Z"}
+{"level":"warn","message":"Registration failed: Username venky already exists","timestamp":"2025-07-18T08:39:01.659Z"}
+{"level":"info","message":"User venky123 registered successfully as Recruiter","timestamp":"2025-07-18T08:39:07.793Z"}
+{"level":"error","message":"Error initializing data:","timestamp":"2025-07-24T20:09:23.902Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-24T20:09:23.926Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-24T20:09:27.967Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-07-24T20:10:17.514Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-25T04:36:40.857Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-25T04:36:42.754Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-07-25T04:47:41.876Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T05:19:49.001Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T05:19:49.703Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T05:20:49.219Z"}
+{"level":"info","message":"Server closed","timestamp":"2025-07-31T05:21:54.858Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T05:24:29.013Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T05:24:29.667Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T05:57:26.386Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T05:57:35.574Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T05:57:36.367Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-07-31T06:03:40.022Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-07-31T06:03:54.629Z"}
+{"level":"info","message":"Application submitted by venky","timestamp":"2025-07-31T06:05:49.496Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:06:15.558Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:06:54.353Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:06:56.497Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:06:57.310Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:06:57.514Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:07:01.918Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:07:30.416Z"}
+{"level":"info","message":"Resume analyzed by venky","timestamp":"2025-07-31T06:07:32.502Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-07-31T06:11:16.542Z"}
+{"level":"info","message":"Job SDE Intern posted by rao","timestamp":"2025-07-31T06:15:20.627Z"}
+{"level":"info","message":"Job SDE Intern posted by rao","timestamp":"2025-07-31T06:15:46.699Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-07-31T06:16:20.619Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-07-31T08:08:22.284Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-07-31T08:08:29.652Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T08:22:16.484Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T08:22:21.380Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T08:22:21.960Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-07-31T08:22:32.951Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T09:31:47.721Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T09:34:10.583Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T09:34:11.148Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T09:39:45.889Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T09:51:41.410Z"}
+{"level":"info","message":"Server running on port 3001","timestamp":"2025-07-31T09:51:42.101Z"}
+{"level":"warn","message":"No or invalid Authorization header provided","timestamp":"2025-07-31T09:55:40.510Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T09:57:56.099Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T09:58:00.035Z"}
+{"level":"info","message":"Server running on port 3001","timestamp":"2025-07-31T09:58:00.664Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T10:01:46.528Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T10:07:00.072Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T10:07:00.680Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T10:07:44.322Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T10:07:47.807Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T10:07:48.488Z"}
+{"level":"info","message":"Server closed","timestamp":"2025-07-31T10:08:00.156Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T10:11:31.992Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T10:11:35.803Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T10:11:36.403Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-07-31T10:11:54.915Z"}
+{"level":"info","message":"Received SIGINT. Shutting down gracefully...","timestamp":"2025-07-31T12:20:23.000Z"}
+{"level":"info","message":"Server closed","timestamp":"2025-07-31T12:20:23.005Z"}
+{"level":"info","message":"MongoDB connection closed","timestamp":"2025-07-31T12:20:23.651Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-07-31T12:21:14.565Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-07-31T12:21:15.193Z"}
+{"level":"error","message":"Error initializing data:","timestamp":"2025-08-01T06:27:44.252Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-01T06:27:44.294Z"}
+{"code":"ETIMEOUT","hostname":"_mongodb._tcp.cluster0.cwivpr4.mongodb.net","level":"error","message":"MongoDB Atlas connection error: querySrv ETIMEOUT _mongodb._tcp.cluster0.cwivpr4.mongodb.net","stack":"Error: querySrv ETIMEOUT _mongodb._tcp.cluster0.cwivpr4.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:293:17)","syscall":"querySrv","timestamp":"2025-08-01T06:28:18.615Z"}
+{"level":"error","message":"Error initializing data:","timestamp":"2025-08-01T06:30:00.374Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-01T06:30:00.417Z"}
+{"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:30:56.694Z"}
+{"errorLabelSet":{},"level":"error","message":"MongoDB Atlas connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{"ac-qmcv4ba-shard-00-00.cwivpr4.mongodb.net:27017":{"$clusterTime":null,"address":"ac-qmcv4ba-shard-00-00.cwivpr4.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":315841,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"ac-qmcv4ba-shard-00-01.cwivpr4.mongodb.net:27017":{"$clusterTime":null,"address":"ac-qmcv4ba-shard-00-01.cwivpr4.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":316378,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"ac-qmcv4ba-shard-00-02.cwivpr4.mongodb.net:27017":{"$clusterTime":null,"address":"ac-qmcv4ba-shard-00-02.cwivpr4.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":303801,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":"atlas-3v3vm6-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\Users\\saipi\\OneDrive\\Desktop\\Projects\\Acharya\\one\\node_modules\\mongoose\\lib\\connection.js:1165:11)\n    at NativeConnection.openUri (C:\\Users\\saipi\\OneDrive\\Desktop\\Projects\\Acharya\\one\\node_modules\\mongoose\\lib\\connection.js:1096:11)","timestamp":"2025-08-01T06:30:56.996Z"}
+{"level":"error","message":"Error initializing data:","timestamp":"2025-08-01T06:31:49.224Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-01T06:31:49.260Z"}
+{"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:32:11.980Z"}
+{"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:32:12.733Z"}
+{"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:32:12.892Z"}
+{"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:32:13.061Z"}
+{"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:32:14.436Z"}
+{"errorLabelSet":{},"level":"error","message":"MongoDB Atlas connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{"ac-qmcv4ba-shard-00-00.cwivpr4.mongodb.net:27017":{"$clusterTime":null,"address":"ac-qmcv4ba-shard-00-00.cwivpr4.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":401825,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"ac-qmcv4ba-shard-00-01.cwivpr4.mongodb.net:27017":{"$clusterTime":null,"address":"ac-qmcv4ba-shard-00-01.cwivpr4.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":401232,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"ac-qmcv4ba-shard-00-02.cwivpr4.mongodb.net:27017":{"$clusterTime":null,"address":"ac-qmcv4ba-shard-00-02.cwivpr4.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":401828,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":"atlas-3v3vm6-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\Users\\saipi\\OneDrive\\Desktop\\Projects\\Acharya\\one\\node_modules\\mongoose\\lib\\connection.js:1165:11)\n    at NativeConnection.openUri (C:\\Users\\saipi\\OneDrive\\Desktop\\Projects\\Acharya\\one\\node_modules\\mongoose\\lib\\connection.js:1096:11)","timestamp":"2025-08-01T06:32:25.413Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-08-01T06:34:58.220Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-01T06:34:58.950Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-08-01T06:35:13.594Z"}
+{"level":"error","message":"Error in /api/clients:","timestamp":"2025-08-01T06:35:53.244Z"}
+{"level":"info","message":"Client Alter office added by sai","timestamp":"2025-08-01T06:35:58.554Z"}
+{"level":"info","message":"Client Alter office added by sai","timestamp":"2025-08-01T06:35:59.566Z"}
+{"level":"info","message":"Client Alter office added by sai","timestamp":"2025-08-01T06:36:03.975Z"}
+{"level":"info","message":"Client Alter office added by sai","timestamp":"2025-08-01T06:36:03.995Z"}
+{"level":"error","message":"Error in /api/clients (POST):","timestamp":"2025-08-01T06:36:04.025Z"}
+{"level":"info","message":"Client Alter office added by sai","timestamp":"2025-08-01T06:36:05.832Z"}
+{"level":"info","message":"Client Alter office added by sai","timestamp":"2025-08-01T06:36:10.328Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-01T06:36:26.188Z"}
+{"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:36:51.982Z"}
+{"level":"error","message":"Error in /api/applications:","timestamp":"2025-08-01T06:37:00.708Z"}
+{"level":"warn","message":"Login failed: Invalid password for username venkat","timestamp":"2025-08-01T06:37:13.680Z"}
+{"level":"warn","message":"Login failed: Invalid password for username venkat","timestamp":"2025-08-01T06:37:16.594Z"}
+{"level":"warn","message":"Login failed: Invalid password for username venkat","timestamp":"2025-08-01T06:37:17.353Z"}
+{"level":"warn","message":"Login failed: Invalid password for username venkat","timestamp":"2025-08-01T06:37:20.746Z"}
+{"level":"warn","message":"Registration failed: Username venky already exists","timestamp":"2025-08-01T06:37:45.537Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-01T06:37:53.321Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-01T06:37:58.773Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-01T06:38:00.295Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-01T06:38:02.127Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-01T06:38:14.962Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-08-01T07:03:17.678Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-01T07:03:35.050Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-08-06T05:52:28.803Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-06T05:52:32.794Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T06:00:08.958Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T06:04:53.912Z"}
+{"level":"info","message":"User rajesh logged in successfully","timestamp":"2025-08-06T06:05:58.720Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T06:06:10.567Z"}
+{"level":"warn","message":"Login failed: Invalid password for username venkat","timestamp":"2025-08-06T06:06:18.227Z"}
+{"level":"warn","message":"Registration failed: Username venky already exists","timestamp":"2025-08-06T06:06:30.517Z"}
+{"level":"warn","message":"Registration failed: Username venkat already exists","timestamp":"2025-08-06T06:06:37.225Z"}
+{"level":"info","message":"User venkatesh registered successfully as Admin","timestamp":"2025-08-06T06:06:45.836Z"}
+{"level":"info","message":"User venkatesh logged in successfully","timestamp":"2025-08-06T06:06:59.846Z"}

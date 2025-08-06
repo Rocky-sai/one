@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs Management - ACHARYA</title>
+    <link rel="stylesheet" href="admin_jobs.css">
+</head>
+<body>
+    <h1>Jobs Management</h1>
+    <button id="back">Back to Dashboard</button>
+    <form id="searchJobForm">
+        <label for="jobId">Search Job by ID:</label>
+        <input type="text" id="jobId" placeholder="Enter Job ID">
+        <button type="submit">Search</button>
+    </form>
+    <div id="jobDetails" style="display: none;">
+        <h2>Job Details</h2>
+        <p>Title: <span id="jobTitle"></span></p>
+        <p>Company: <span id="jobCompany"></span></p>
+        <p>Location: <span id="jobLocation"></span></p>
+        <form id="updateJobForm">
+            <label for="updateTitle">Update Title:</label>
+            <input type="text" id="updateTitle">
+            <label for="updateCompany">Update Company:</label>
+            <input type="text" id="updateCompany">
+            <label for="updateLocation">Update Location:</label>
+            <input type="text" id="updateLocation">
+            <button type="submit">Update Job</button>
+            <button type="button" id="deleteJob">Delete Job</button>
+        </form>
+    </div>
+    <div id="jobList">
+        <h2>All Jobs</h2>
+        <ul></ul>
+    </div>
+    <script src="admin_jobs.js"></script>
+</body>
+</html>

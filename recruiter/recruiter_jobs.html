@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Postings - ACHARYA</title>
+    <link rel="stylesheet" href="recruiter_jobs.css">
+</head>
+<body>
+    <h1>Job Postings</h1>
+    <button id="back">Back to Dashboard</button>
+    <form id="postJobForm">
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" required>
+        <label for="jobCompany">Company:</label>
+        <input type="text" id="jobCompany" required>
+        <label for="jobLocation">Location:</label>
+        <input type="text" id="jobLocation" required>
+        <button type="submit">Post Job</button>
+    </form>
+    <div id="jobList">
+        <h2>Posted Jobs</h2>
+        <ul></ul>
+    </div>
+    <script src="recruiter_jobs.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a, #000000);
+    color: #ffffff;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 20px 10px 40px 10px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.15rem;
+    text-align: center;
+    color: #87ceeb;
+    margin-bottom: 28px;
+    text-shadow: 0 0 10px rgba(135,206,235,0.3);
+}
+
+#back {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 10;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    background: #ff6f61;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+#back:hover, #back:focus {
+    background: #ff3b2f;
+}
+
+form {
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.05);
+    padding: 28px 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.13);
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.11rem;
+    margin-bottom: 3px;
+    color: #87ceeb;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(135,206,235,0.35);
+    border-radius: 5px;
+    background: rgba(0,0,0,0.22);
+    color: #fff;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="file"] {
+    display: none;
+}
+.file-upload-label {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 5px;
+    background: #555;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 4px;
+    width: 100%;
+    font-family: 'Orbitron', sans-serif;
+    outline: none;
+    border: none;
+}
+.file-upload-label:hover, .file-upload-label:focus {
+    background: #777;
+}
+
+#fileName {
+    margin-bottom: 8px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #87ceeb;
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.19rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+button[type="submit"]:hover, button[type="submit"]:focus {
+    background: #00b7eb;
+}
+
+#analysisContainer {
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.05);
+    padding: 28px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.13);
+    margin-bottom: 40px;
+    min-height: 120px;
+}
+
+#analysisResult h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #87ceeb;
+    text-align: center;
+    border-bottom: 2px solid #87ceeb;
+    padding-bottom: 6px;
+    margin-bottom: 18px;
+}
+#analysisResult h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    margin-top: 23px;
+    border-left: 4px solid;
+    padding-left: 10px;
+    font-weight: 700;
+}
+
+#analysisResult .strengths { border-color: #50fa7b; color: #50fa7b; }
+#analysisResult .improvements { border-color: #ffb86c; color: #ffb86c; }
+#analysisResult .gaps { border-color: #ff5555; color: #ff5555; }
+#analysisResult .formatting { border-color: #bd93f9; color: #bd93f9; }
+#analysisResult .summary { color: #f1fa8c; }
+
+#analysisResult p, #analysisResult li {
+    line-height: 1.58;
+    color: #e0e0e0;
+}
+
+#analysisResult ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#analysisResult li {
+    background: rgba(0,0,0,0.19);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 3px solid #87ceeb;
+}
+
+@media (max-width: 600px) {
+    main, #analysisContainer, form {
+        padding: 10px 2px;
+    }
+    h1 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Loader Animation */
+#loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto 18px auto;
+}
+.spinner {
+    border: 8px solid #333;
+    border-top: 8px solid #87ceeb;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 14px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+#loader span {
+    font-family: 'Orbitron', sans-serif;
+    color: #87ceeb;
+    font-size: 1.09rem;
+    text-shadow: 0 0 8px #87ceeb;
+}
