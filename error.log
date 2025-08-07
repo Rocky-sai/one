@@ -18,3 +18,5 @@
 {"level":"error","message":"Error in /api/clients (POST):","timestamp":"2025-08-01T06:36:04.025Z"}
 {"level":"error","message":"Error in /api/login:","timestamp":"2025-08-01T06:36:51.982Z"}
 {"level":"error","message":"Error in /api/applications:","timestamp":"2025-08-01T06:37:00.708Z"}
+2025-08-06 22:51:05,882 INFO Startup initialized default data if missing.
+2025-08-06 22:54:20,987 INFO Startup initialized default data if missing.

@@ -189,3 +189,71 @@
 {"level":"warn","message":"Registration failed: Username venkat already exists","timestamp":"2025-08-06T06:06:37.225Z"}
 {"level":"info","message":"User venkatesh registered successfully as Admin","timestamp":"2025-08-06T06:06:45.836Z"}
 {"level":"info","message":"User venkatesh logged in successfully","timestamp":"2025-08-06T06:06:59.846Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T06:54:49.787Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T07:03:47.290Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T07:10:26.149Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T07:20:47.632Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-08-06T16:21:27.131Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-06T16:21:27.535Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T16:22:00.935Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-08-06T16:26:29.678Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-06T16:26:30.019Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T16:27:19.266Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-08-06T16:28:15.103Z"}
+{"level":"info","message":"Connected to MongoDB Atlas","timestamp":"2025-08-06T16:37:07.967Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-08-06T16:37:08.408Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-08-06T16:45:09.071Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T16:45:15.914Z"}
+2025-08-06 22:51:05,882 INFO Startup initialized default data if missing.
+2025-08-06 22:54:20,987 INFO Startup initialized default data if missing.
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T17:24:43.068Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T17:26:07.874Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T17:26:34.875Z"}
+{"level":"info","message":"Job SDE Intern posted by rao","timestamp":"2025-08-06T17:26:45.646Z"}
+{"level":"info","message":"Job SDE Intern posted by rao","timestamp":"2025-08-06T17:26:52.941Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T17:32:54.961Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T17:43:03.615Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T18:21:06.867Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T18:21:15.727Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T18:44:58.504Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T21:34:28.627Z"}
+{"level":"warn","message":"Login failed: Invalid credentials for username rao ","timestamp":"2025-08-06T21:34:36.109Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:34:40.625Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T21:35:40.976Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:49:40.777Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:50:10.981Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:56:41.070Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:56:51.910Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:57:10.018Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:57:45.598Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T21:58:03.979Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T21:58:22.527Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T22:03:47.077Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T22:04:04.126Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T22:08:47.795Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T22:08:57.483Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T22:14:12.885Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T22:16:25.197Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T22:17:43.684Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T22:18:06.012Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T22:47:18.331Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T22:48:35.639Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T22:57:19.493Z"}
+{"level":"warn","message":"Invalid token:","timestamp":"2025-08-06T22:57:22.788Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T22:57:34.152Z"}
+{"level":"warn","message":"Invalid token:","timestamp":"2025-08-06T22:59:41.200Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T22:59:46.362Z"}
+{"level":"warn","message":"Invalid token:","timestamp":"2025-08-06T22:59:58.348Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T23:02:46.018Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T23:09:02.330Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T23:53:40.874Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T23:53:50.415Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T23:54:03.382Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-06T23:59:07.751Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-06T23:59:26.103Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-07T00:00:02.356Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-07T00:00:25.915Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-07T00:02:18.271Z"}
+{"level":"info","message":"User venky logged in successfully","timestamp":"2025-08-07T00:17:31.840Z"}
+{"level":"info","message":"User rao logged in successfully","timestamp":"2025-08-07T00:18:25.946Z"}
+{"level":"info","message":"User sai logged in successfully","timestamp":"2025-08-07T00:19:06.979Z"}
